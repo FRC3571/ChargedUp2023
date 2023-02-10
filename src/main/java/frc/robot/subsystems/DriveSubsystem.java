@@ -9,11 +9,17 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 
-// import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
+
+
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 /**
  * Add your docs here.
  */
@@ -21,10 +27,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   public boolean slow;
   
-  TalonSRX Left1 = new TalonSRX(RobotMap.Left1);
-  TalonSRX Left2 = new TalonSRX(RobotMap.Left2);
-  TalonSRX Right1 = new TalonSRX(RobotMap.Right1);
-  TalonSRX Right2 = new TalonSRX(RobotMap.Right2);
+  CANSparkMax Left1;
+  CANSparkMax Left2;
+  CANSparkMax Right1;
+  CANSparkMax Right2;
 
   // public void initDefaultCommand() {
   //   slow = false;
