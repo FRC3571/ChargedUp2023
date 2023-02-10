@@ -1,5 +1,5 @@
-# FRC2023
-Team 3571's code for ChargedUp2023
+# ChargedUp2023
+Team 3571's robot code for ChargedUp2023
 
 ## Commit Message Prefixes
 
