@@ -27,27 +27,33 @@ public class DriveSubsystem extends SubsystemBase {
 
   public boolean slow;
   
-  CANSparkMax Left1;
-  CANSparkMax Left2;
-  CANSparkMax Right1;
-  CANSparkMax Right2;
+  CANSparkMax Left1 = new CANSparkMax(1, MotorType.kBrushless);;
+  //CANSparkMax Left2;
+  CANSparkMax Right1 = new CANSparkMax(3, MotorType.kBrushless);
+  //CANSparkMax Right2;
+
+  // has a built in tankdrive method, which means we dont need to make a new method (until we add 4 spark maxes at least)
+  DifferentialDrive myRobot = new DifferentialDrive(Left1, Right1);
 
   // public void initDefaultCommand() {
   //   slow = false;
   // }
 
-  public void TankDrive (double left, double right) {
+    // might need to use and make this method when we start to use all 4 spark maxes, Currently only 2 are being used
+   public void TankDrive (double left, double right) {
+    //myRobot.tankDrive(ControlMode.PercentOutput, m_rightStick.getY());
+    
 
     // if (slow) {
     //   left *= 0.80;
     //   right *= 0.80;
     // }
-
+    
     // Drive the left and right sides of the talons
-    Left1.set(ControlMode.PercentOutput,left);
-    Left2.set(ControlMode.PercentOutput,left);
-    Right1.set(ControlMode.PercentOutput,-right);
-    Right2.set(ControlMode.PercentOutput,-right);
+    //Left1.set(ControlMode.PercentOutput,left);
+    //Left2.set(ControlMode.PercentOutput,left);
+    //Right1.set(ControlMode.PercentOutput,-right);
+    //Right2.set(ControlMode.PercentOutput,-right);
 
     // Left1.configPeakOutputForward(1);
     // Left1.configPeakOutputReverse(-1);
@@ -83,7 +89,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   public void ArcadeDrive (double speed, double turn) {
-    TankDrive((speed - turn) * 0.5, (speed + turn) * 0.5);
+    myRobot.tankDrive((speed - turn) * 0.5, (speed + turn) * 0.5);
   }
 
 }
