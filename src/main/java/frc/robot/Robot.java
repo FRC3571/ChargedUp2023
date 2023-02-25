@@ -26,8 +26,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
-  public static DriveSubsystem DriveSubsystem = new DriveSubsystem();
-  public static DriveCommand DriveCommand = new DriveCommand();
+  public static DriveSubsystem m_driveSubsystem;
+  //public static DriveCommand DriveCommand = new DriveCommand();
 
   // public static SendableChooser<Double> m_Chooser = new SendableChooser<>();
 
@@ -38,7 +38,9 @@ public class Robot extends TimedRobot {
    * used for any initialization code.
    */
   public void robotInit() {
+    m_driveSubsystem = new DriveSubsystem();
     Camera = CameraServer.startAutomaticCapture(0);
+    
     // m_Chooser.setDefaultOption("Lowspeed", 0.5);
     // m_Chooser.addOption("Highspeed", 1.0);
     // SmartDashboard.putData(m_Chooser);
@@ -85,7 +87,7 @@ public class Robot extends TimedRobot {
    */
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-    DriveCommand.schedule();
+    //DriveCommand.schedule();
   }
 
   /**

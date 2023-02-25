@@ -11,79 +11,73 @@ import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
-
-
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.motorcontrol.*;
+
 /**
- * Add your docs here.
+ * TODO: Clean this code up. 
+ * 
+ * sorry for the mess - Ansh
  */
 public class DriveSubsystem extends SubsystemBase {
 
+
+  // TODO: Add slow speed
   public boolean slow;
   
-  CANSparkMax Left1;
-  CANSparkMax Left2;
-  CANSparkMax Right1;
-  CANSparkMax Right2;
+  // CANSparkMax m_leftMotor = new CANSparkMax(1, MotorType.kBrushless);
+  // CANSparkMax Left2 = new CANSparkMax(3, MotorType.kBrushless);
+  // CANSparkMax m_rightMotor = new CANSparkMax(2, MotorType.kBrushless);
+  // CANSparkMax Right2 = new CANSparkMax(4, MotorType.kBrushless);
+
+  private CANSparkMax spark1, spark2, spark3, spark4;
+  private DifferentialDrive m_drive;
+
+  XboxController controller = new XboxController(0); // 0 is the USB Port to be used as indicated on the Driver Station
+
+  /* SPARKMAX CONFIG 
+   *   1  3
+   * 
+   *   2  4
+   */
+
+   // TODO: add sparkmax constants to ../RobotMap.java
+
 
   // public void initDefaultCommand() {
   //   slow = false;
   // }
 
-  public void TankDrive (double left, double right) {
+  public DriveSubsystem() {
 
-    // if (slow) {
-    //   left *= 0.80;
-    //   right *= 0.80;
-    // }
+    //TODO: make the variable names a bit more readable
+    spark1 = new CANSparkMax(1, MotorType.kBrushless);
+    spark2 = new CANSparkMax(2, MotorType.kBrushless);
+    spark3 = new CANSparkMax(3, MotorType.kBrushless);
+    spark4 = new CANSparkMax(4, MotorType.kBrushless);
 
-    // Drive the left and right sides of the talons
-    Left1.set(ControlMode.PercentOutput,left);
-    Left2.set(ControlMode.PercentOutput,left);
-    Right1.set(ControlMode.PercentOutput,-right);
-    Right2.set(ControlMode.PercentOutput,-right);
+    MotorControllerGroup m_left = new MotorControllerGroup(spark1, spark2);
+    MotorControllerGroup m_right = new MotorControllerGroup(spark3, spark4);
 
-    // Left1.configPeakOutputForward(1);
-    // Left1.configPeakOutputReverse(-1);
-    // Left2.configPeakOutputForward(1);
-    // Left2.configPeakOutputReverse(-1);
-    // Right1.configPeakOutputForward(1);
-    // Right1.configPeakOutputReverse(-1);
-    // Right2.configPeakOutputForward(1);
-    // Right2.configPeakOutputReverse(-1);
+    m_drive = new DifferentialDrive(m_left, m_right);
 
-
-    
-    // Left1.setInverted(true);
-    // Left2.setInverted(true);
-    // Right1.setInverted(false);
-    // Right2.setInverted(false);
-
-
-    // System.out.println("Running Left:" + left + "\tRunning Right:" + right);
+    //m_leftMotor.restoreFactoryDefaults();
+    //m_rightMotor.restoreFactoryDefaults();
   }
 
-  // public void setMotorPercent(double percent) {
+  @Override
+  public void periodic() {
 
-  //   Left1.set(ControlMode.PercentOutput, percent);
-  //   Left2.set(ControlMode.PercentOutput, percent);
-  //   Right1.set(ControlMode.PercentOutput, percent);
-  //   Right2.set(ControlMode.PercentOutput, percent);
-
-  // }
-
-
-    
-
-
-  public void ArcadeDrive (double speed, double turn) {
-    TankDrive((speed - turn) * 0.5, (speed + turn) * 0.5);
+    // not exactly sure how else to implement this
+    m_drive.tankDrive(-controller.getLeftY(), -controller.getRightY());
+    // This method will be called once per scheduler run
   }
+
 
 }
