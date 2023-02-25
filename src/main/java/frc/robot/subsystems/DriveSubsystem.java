@@ -74,9 +74,14 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
+<<<<<<< HEAD
     // not exactly sure how else to implement this
     m_drive.tankDrive(-controller.getLeftY(), -controller.getRightY());
     // This method will be called once per scheduler run
+=======
+  public void ArcadeDrive (double speed, double turn) {
+    myRobot.tankDrive((speed - turn) * 0.5, (speed + turn) * 0.5);
+>>>>>>> 7fc30cc314aed71cd9eee9e4e4f7bb32ec73ce1a
   }
 
 
