@@ -21,7 +21,7 @@ public class DriveCommand extends CommandBase {
   double bCounter = 0;
 
   public DriveCommand() {
-    addRequirements(Robot.DriveSubsystem);
+    //addRequirements(Robot.DriveSubsystem);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
